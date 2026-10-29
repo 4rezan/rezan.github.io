@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050807">
+  <meta name="description" content="Rezan | Developer, hacker mindset, and digital explorer.">
+  <title>REZAN // SYSTEM ONLINE</title>
+
+  <style>
+    :root {
+      --bg: #050807;
+      --green: #00ff9c;
+      --muted: #81968b;
+      --panel: #0b1210;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #e5fff1;
+      font-family: Consolas, "Courier New", monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        linear-gradient(#00ff9c08 1px, transparent 1px),
+        linear-gradient(90deg, #00ff9c08 1px, transparent 1px);
+      background-size: 35px 35px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      max-width: 1100px;
+      margin: auto;
+      padding: 26px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #163026;
+    }
+
+    .logo {
+      color: var(--green);
+      font-size: 21px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    nav { display: flex; gap: 24px; }
+
+    nav a {
+      font-size: 12px;
+      color: var(--muted);
+      transition: color .2s;
+    }
+
+    nav a:hover { color: var(--green); }
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 100px 24px 70px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--green);
+      border: 1px solid #00ff9c40;
+      background: #00ff9c0b;
+      padding: 10px 14px;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
+      animation: pulse 1.5s infinite;
+    }
+
+    h1 {
+      font-size: clamp(54px, 11vw, 105px);
+      line-height: 1;
+      letter-spacing: -5px;
+      margin: 35px 0 20px;
+    }
+
+    h1 span {
+      color: var(--green);
+      text-shadow: 0 0 35px #00ff9c25;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: clamp(14px, 2vw, 17px);
+      line-height: 1.9;
+      max-width: 620px;
+    }
+
+    .terminal {
+      margin-top: 45px;
+      max-width: 700px;
+      border: 1px solid #1b382b;
+      background: #080e0b;
+      box-shadow: 0 0 50px #00ff9c08;
+    }
+
+    .terminal-bar {
+      padding: 13px 16px;
+      background: var(--panel);
+      border-bottom: 1px solid #1b382b;
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #284b3a;
+    }
+
+    .terminal-content {
+      padding: 24px;
+      font-size: 13px;
+      line-height: 2.2;
+      overflow-wrap: anywhere;
+    }
+
+    .prompt { color: var(--green); }
+    .muted { color: var(--muted); }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 15px;
+      background: var(--green);
+      vertical-align: middle;
+      animation: blink 1s steps(2) infinite;
+    }
+
+    .section-title {
+      font-size: 13px;
+      color: var(--green);
+      letter-spacing: 3px;
+      margin: 75px 0 22px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid #1b382b;
+      padding: 23px;
+      background: #09100d;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .card:hover {
+      border-color: var(--green);
+      transform: translateY(-4px);
+    }
+
+    .card .number {
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    .card h3 { font-size: 15px; margin: 18px 0 10px; }
+    .card p { color: var(--muted); font-size: 12px; line-height: 1.8; }
+
+    .links { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .button {
+      border: 1px solid var(--green);
+      padding: 13px 18px;
+      color: var(--green);
+      font-size: 12px;
+      transition: background .2s, color .2s;
+    }
+
+    .button:hover {
+      background: var(--green);
+      color: #050807;
+    }
+
+    footer {
+      border-top: 1px solid #163026;
+      padding: 26px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    footer span { color: var(--green); }
+
+    @keyframes pulse { 50% { opacity: .35; } }
+    @keyframes blink { to { visibility: hidden; } }
+
+    @media (max-width: 650px) {
+      header { padding: 20px; }
+      nav { gap: 12px; }
+      nav a { font-size: 10px; }
+      main { padding-top: 70px; }
+      h1 { letter-spacing: -3px; }
+      .cards { grid-template-columns: 1fr; }
+      .terminal-content { padding: 17px; font-size: 11px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a class="logo" href="#">REZAN<span>//</span></a>
+    <nav>
+      <a href="#about">ABOUT</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="status">
+      <span class="dot"></span>
+      ALL SYSTEMS OPERATIONAL
+    </div>
+
+    <h1>THINK.<br>CODE.<br><span>REPEAT.</span></h1>
+
+    <p class="subtitle">
+      Welcome to my digital space. I explore technology,
+      write code, solve problems, and turn ideas into reality.
+      Always learning. Always building.
+    </p>
+
+    <section class="terminal" id="about">
+      <div class="terminal-bar">
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span class="circle"></span>
+        <span style="margin-left:8px">rezan@system: ~</span>
+      </div>
+
+      <div class="terminal-content">
+        <div><span class="prompt">rezan@system:~$</span> whoami</div>
+        <div class="muted">Developer // Digital Explorer</div>
+        <div><span class="prompt">rezan@system:~$</span> cat mission.txt</div>
+        <div>Learn. Build. Secure. Improve.</div>
+        <div><span class="prompt">rezan@system:~$</span> echo $STATUS</div>
+        <div style="color:var(--green)">ONLINE AND LEARNING<span class="cursor"></span></div>
+      </div>
+    </section>
+
+    <h2 class="section-title" id="skills">// WHAT DRIVES ME</h2>
+
+    <div class="cards">
+      <article class="card">
+        <div class="number">01 / CODE</div>
+        <h3>Development</h3>
+        <p>Building digital experiences, experimenting with code, and turning ideas into projects.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">02 / SECURITY</div>
+        <h3>Cybersecurity</h3>
+        <p>Exploring security concepts, understanding vulnerabilities, and learning to build safer systems.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">03 / EXPLORE</div>
+        <h3>Always Learning</h3>
+        <p>Curiosity is the exploit. Knowledge is the privilege escalation.</p>
+      </article>
+    </div>
+
+    <h2 class="section-title" id="contact">// ESTABLISH CONNECTION</h2>
+
+    <div class="links">
+      <a class="button" href="https://github.com/rezan" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+      <a class="button" href="https://github.com/rezan?tab=repositories">PROJECTS ↗</a>
+    </div>
+  </main>
+
+  <footer>
+    <div><span>REZAN</span> // DIGITAL SPACE</div>
+    <div>Built with code, curiosity &amp; caffeine.</div>
+    <div>© <span id="year"></span> — SYSTEM READY</div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
